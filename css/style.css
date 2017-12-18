@@ -1,0 +1,66 @@
+body {
+	margin: 0;
+	background-color: #4d505d;
+}
+
+div.container {
+	width: 400px;
+	margin: 50px auto;
+}
+
+#carousel {
+	border: 7px solid white;
+	border-radius: 3px;
+	box-shadow: 0px 0px 20px #363840;
+	width: 400px;
+	overflow: hidden;
+}
+
+#carousel > ul {
+	margin: 0;
+	padding: 0;
+	width: 2000px;
+	position: relative;
+} 
+
+#carousel >  ul > li {
+	list-style: none;
+	height: 250px;
+	width: 400px;
+	float: left;	
+}
+
+div.container > .carousel-controls {
+	position: relative;
+}
+div.container > .carousel-controls > .fa {
+	position: absolute;
+}
+
+div.container .fa-angle-left {
+	cursor: pointer;
+	color: #9295a7;
+	font-size: 60px;
+	top: 105px;
+	left: -80px;
+	transition: .2s ease-out;
+}
+
+div.container .fa-angle-right {
+	cursor: pointer;
+	font-size: 60px;
+	color: #9295a7;
+	top: 105px;
+	right: -80px;
+	transition: .2s ease-out;
+}
+
+div.container .fa-angle-right:hover {
+	transform: scale(1.4);
+	color: white;
+}
+
+div.container .fa-angle-left:hover {
+	transform: scale(1.4);
+	color: white;
+}
