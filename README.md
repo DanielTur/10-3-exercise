@@ -1,4 +1,4 @@
-# 10-3-exercise
+# https://danieltur.github.io/10-3-exercise/
 Building jQuery carousel
 
 to do:
