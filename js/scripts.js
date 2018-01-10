@@ -1,43 +1,66 @@
 // scripts.js
 
 $(function() {
-	var carouselList = $('#carousel > ul'),
-		carousel_controls = $('.carousel-controls'),
-		goLeft = $("#arrow-left"),
-		goRight = $("#arrow-right");
+	var carousel = $('#carousel'),
+		carouselList = carousel.find('.photo'),
+		carouselDots = carousel.find('.dots');
 	
-	function changeSlide () {
-		carouselList.animate({'marginLeft': -400}, 800, moveFirstSlide);
-	}
-	function interval () {
-		interval = setInterval(changeSlide, 4000);
-	}
+	carouselList.find('li').each(function() {
+		carouselDots.append('<li></li>');
+	});
+
+	var dot = carouselDots.find('li');
+	dot.first().addClass('active');
+
+	dot.click(function(){
+		if(!$(this).hasClass('active')){
+		target = $(this).index();
+		dotClick(target);
+		};
+	});
+	
+	function dotClick(target) {
+		carouselList.stop().animate({'left': -400 * target});
+		dot.removeClass('active').eq(target).addClass('active');
+	};
+
+	var slideLeft = $("#arrow-left"),
+		slideRight = $("#arrow-right"),
+		carouselControls = $('.carousel-controls');
+
+	slideLeft.click(function() {
+		current = $('.active').index();
+		dotCount = carouselDots.find('li').length;
+			if ($('li.active').is(':first-child')) {
+				carouselList.stop().animate({'left': -400 * (dotCount - 1)}, 800);
+				dot.removeClass('active').last().addClass('active');
+			} else {
+				carouselList.stop().animate({'left': (current * -400) + 400}, 800);
+				$('.active').prev().addClass('active').next().removeClass('active');		
+			};
+	});
+
+	slideRight.click(function() {
+		autoSlide();
+	});
+
+	function autoSlide() {
+		current = $('.active').index();
+			if ($('li.active').is(':last-child')) {
+				carouselList.stop().animate({'left': 0}, 800);
+				dot.removeClass('active').first().addClass('active');
+			} else {
+				carouselList.stop().animate({'left': -400 * (current + 1)}, 800);	
+				$('.active').next().addClass('active').prev().removeClass('active');
+			};
+	};
+
+	function interval() {
+		interval = setInterval(autoSlide, 5000);
+	};
 	function stopInterval () {
 		clearInterval(interval);
 	}
-	carousel_controls.on('mouseenter', stopInterval).on('mouseleave', interval);
+	carouselControls.on('mouseenter', stopInterval).on('mouseleave', interval);
 	interval();
-
-	function moveFirstSlide() { 	
-			var firstItem = carouselList.find('li:first');
-			var lastItem = carouselList.find('li:last');
-			lastItem.after(firstItem);
-			carouselList.css({'marginLeft':0});
-	};
-	function moveLastSlide() { 	
-			var firstItem = carouselList.find('li:first');
-			var lastItem = carouselList.find('li:last');
-			firstItem.before(lastItem);
-			carouselList.css({'marginLeft':-400});
-	};
-
-	goLeft.click(function() {
-		carouselList.animate({'marginLeft': 0}, 800, moveLastSlide);
-	});
-	goRight.click(function() {
-		carouselList.animate({'marginLeft': -400}, 800, moveFirstSlide);
-	});
 });
-
-// to do : pagination/bullets!
-

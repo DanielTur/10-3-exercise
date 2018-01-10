@@ -13,21 +13,40 @@ div.container {
 	border-radius: 3px;
 	box-shadow: 0px 0px 20px #363840;
 	width: 400px;
+	height: 250px;
 	overflow: hidden;
+	position: relative;
 }
 
-#carousel > ul {
+#carousel > .photo {
 	margin: 0;
 	padding: 0;
 	width: 2000px;
-	position: relative;
+	position: absolute;
 } 
 
-#carousel >  ul > li {
+#carousel >  .photo > li {
 	list-style: none;
 	height: 250px;
 	width: 400px;
 	float: left;	
+}
+
+#carousel > .dots {
+	position: absolute;
+}
+
+#carousel > .dots > li {
+	height: 8px;
+	width: 8px;
+	background-color: white;
+	border-radius: 50px;
+	display: inline-block;
+	margin: 5px;
+}
+
+#carousel > .dots > .active {
+	background-color: red;
 }
 
 div.container > .carousel-controls {
